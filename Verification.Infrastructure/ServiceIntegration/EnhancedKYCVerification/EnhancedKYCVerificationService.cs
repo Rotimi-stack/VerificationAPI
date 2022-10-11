@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Verification.Application.Common.Interface;
 using Verification.Application.Common.Model;
 using Verification.Domain.Enum.EnhancedKYCVerification;
+using static Verification.Application.Common.EnhancedKYCVerification.Command.EnhancedKYCVerificationCommand;
 
 namespace Verification.Infrastructure.ServiceIntegration.EnhancedBvnVerification
 {
@@ -47,7 +48,7 @@ namespace Verification.Infrastructure.ServiceIntegration.EnhancedBvnVerification
                 partner_id = kyc.partner_id,
                 partner_params = kyc.partner_params,
                 phone_number = kyc.phone_number,
-                signature = kyc.signature,
+                signature = Signature.SmileID,
                 source_sdk = kyc.source_sdk,
                 source_sdk_version = kyc.source_sdk_version,
                 timestamp = kyc.timestamp,

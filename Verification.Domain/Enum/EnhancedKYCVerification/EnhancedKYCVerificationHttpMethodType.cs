@@ -13,4 +13,9 @@ namespace Verification.Domain.Enum.EnhancedKYCVerification
         Delete,
         Put
     }
+
+    public enum Signature
+    {
+        SmileID 
+    }
 }

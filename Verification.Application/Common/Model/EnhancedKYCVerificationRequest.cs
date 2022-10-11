@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Verification.Application.Common.EnhancedKYCVerification.Command;
+using Verification.Domain.Enum.EnhancedKYCVerification;
 
 namespace Verification.Application.Common.Model
 {
@@ -13,7 +14,7 @@ namespace Verification.Application.Common.Model
         public string source_sdk_version { get; set; } = String.Empty;
         public string partner_id { get; set; } = String.Empty;
         public DateTime timestamp { get; set; } 
-        public string signature { get; set; } = String.Empty;
+        public Signature signature { get; set; }
         public string country { get; set; } = String.Empty;
         public string id_type { get; set; } = String.Empty;
         public string id_number { get; set; } = String.Empty;
