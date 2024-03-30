@@ -10,5 +10,6 @@ namespace Verification.Application.Common.Interface
     public interface EnhancedKYCVerificationInterface
     {
         Task<EnhancedKYCResponse> GetEnhancedKYCVerification(EnhancedKYCVerificationResource kyc);
+        Task<EnhancedKYCResponse> CallBackUrl(CallBackUrlResource kyc);
     }
 }

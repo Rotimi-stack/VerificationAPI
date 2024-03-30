@@ -1,3 +1,9 @@
+using FSDH.Shared.LogService;
+using System.Security.Cryptography;
+using System.Text;
+using Verification.Application.Common.Interface;
+using Verification.Infrastructure.ServiceIntegration.EnhancedBvnVerification;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +12,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<EnhancedKYCVerificationInterface, EnhancedKYCVerificationService>();
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<ILogWritter, LogWriter>();
+builder.Services.AddControllers();
+
 
 var app = builder.Build();
 

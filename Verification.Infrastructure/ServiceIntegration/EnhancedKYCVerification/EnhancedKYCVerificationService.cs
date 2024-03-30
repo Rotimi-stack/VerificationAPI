@@ -7,11 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Verification.Application.Common.Interface;
 using Verification.Application.Common.Model;
+using Verification.Application.Utilities;
 using Verification.Domain.Enum.EnhancedKYCVerification;
 using static Verification.Application.Common.EnhancedKYCVerification.Command.EnhancedKYCVerificationCommand;
 
@@ -34,6 +36,7 @@ namespace Verification.Infrastructure.ServiceIntegration.EnhancedBvnVerification
 
         public async Task<EnhancedKYCResponse> GetEnhancedKYCVerification(EnhancedKYCVerificationResource kyc)
         {
+            string generateSignature = new SignatureGenerator(_config).GenerateSignature();
             var data = new EnhancedKYCVerificationRequest
             {
                 callback_url = kyc.callback_url,
@@ -48,7 +51,7 @@ namespace Verification.Infrastructure.ServiceIntegration.EnhancedBvnVerification
                 partner_id = kyc.partner_id,
                 partner_params = kyc.partner_params,
                 phone_number = kyc.phone_number,
-                signature = Signature.SmileID,
+                signature = generateSignature,
                 source_sdk = kyc.source_sdk,
                 source_sdk_version = kyc.source_sdk_version,
                 timestamp = kyc.timestamp,
@@ -57,6 +60,17 @@ namespace Verification.Infrastructure.ServiceIntegration.EnhancedBvnVerification
                 data, "", EnhancedKYCVerificationHttpMethodType.Post
                 );
         }
+
+        public async Task<EnhancedKYCResponse> CallBackUrl(CallBackUrlResource kyc)
+        {
+            var data = new CallbackUrlRequest
+            {
+                success= kyc.success,
+            };
+            return await SendAsync<CallbackUrlRequest, EnhancedKYCResponse>(
+                data, "", EnhancedKYCVerificationHttpMethodType.Post);
+        }
+
 
 
 
@@ -139,5 +153,24 @@ namespace Verification.Infrastructure.ServiceIntegration.EnhancedBvnVerification
             }
 
         }
+
+        
     }
 }
+
+
+
+
+//public string GenerateSignature(string PartnerID, string ApiKey)
+//{
+//    string timeStamp = DateTime.UtcNow.ToString("yyyy-MM-dd'T'HH:mm:ss.fffK", System.Globalization.CultureInfo.InvariantCulture);
+//    string apiKey = "d80a5301-ff7d-4458-8074-095001575012";
+//    string partnerID = "433";
+//    string data = timeStamp + partnerID + "sid_request";
+//    UTF8Encoding utf8 = new UTF8Encoding();
+//    Byte[] key = utf8.GetBytes(apiKey);
+//    Byte[] message = utf8.GetBytes(data);
+//    HMACSHA256 hash = new HMACSHA256(key);
+//    var signature = hash.ComputeHash(message);
+//    return signature.ToString();
+//}

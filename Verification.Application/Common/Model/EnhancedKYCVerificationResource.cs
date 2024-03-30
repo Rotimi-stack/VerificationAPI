@@ -15,7 +15,7 @@ namespace Verification.Application.Common.Model
         public string source_sdk_version { get; set; } = String.Empty;
         public string partner_id { get; set; } = String.Empty;
         public DateTime timestamp { get; set; }
-        public Signature signature { get; set; }
+        public string signature { get; set; }=String.Empty;
         public string country { get; set; } = String.Empty;
         public string id_type { get; set; } = String.Empty;
         public string id_number { get; set; } = String.Empty;

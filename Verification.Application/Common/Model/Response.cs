@@ -46,4 +46,14 @@ namespace Verification.Application.Common.Model
     {
         public bool success { get; set; }
     }
+
+    public class TokenResponse
+    {
+        public bool status { get; set; }
+        public string message { get; set; } = String.Empty;
+        //public string results { get; set; } = String.Empty;
+
+ 
+    }
+
 }

@@ -15,7 +15,7 @@ namespace Verification.Application.Common.EnhancedKYCVerification.Command
         public string source_sdk_version { get; set; } = String.Empty;
         public string partner_id { get; set; } = String.Empty;
         public DateTime timestamp { get; set; }
-        public enum signature { }
+        public string signature { get; set; }=String.Empty;
         public string country { get; set; } = String.Empty;
         public string id_type { get; set; } = String.Empty;
         public string id_number { get; set; } = String.Empty;
@@ -29,9 +29,5 @@ namespace Verification.Application.Common.EnhancedKYCVerification.Command
         public PartnerParams? partner_params { get; set; }
        
     }
-    public class PartnerParams
-    {
-        public string job_id { get; set; } = String.Empty;
-        public string user_id { get; set; } = String.Empty;
-    }
+   
 }
